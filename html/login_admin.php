@@ -1,7 +1,9 @@
-
-<?php include 'dblink.php';
-session_start();
-echo '<link rel="stylesheet" href="login.css" type="text/css">';
+<?php session_start();
+//Author: Adam Romanowicz
+//Description: Admin Login screen - Three Strikes System
+include 'dblink.php';
+echo '<title>Riverbridge Univeristy</title>
+<link rel="stylesheet" href="login2.css" type="text/css">';
 if (ISSET($_POST['username']) && ISSET($_POST['password'])) //stores inputted variables into session
 {
     $attempts = $_SESSION['attempts']; //stores attempts in session
@@ -23,22 +25,19 @@ if (ISSET($_POST['username']) && ISSET($_POST['password'])) //stores inputted va
                 $_SESSION['attempts'] = $attempts;
                 buildPage($attempts);
 
-                echo "<div class='errorstyle'>No record found with this login name and password combination - Please try again.</div>";
+                echo "<script> alert('No record found with this login name and password combination - Please try again.'); </script>";
              }
             else //attempts more than 3
             {
-                echo "<div class='errorstyle'>Sorry - You have used all 3 attempts<br> 
-                Shutting down ...</div>";   
+               echo "<script> alert('Sorry - You have used all 3 attempts'); </script>";
             }
         }
-        else 
-        {
-            //Successful login
-            $_SESSION['user'] = $_POST['username']; //Session variable to keep track of the login name
-                                                     // for use with Change Password screen
-            $_SESSION['loggedIn'] = true;
+        else //successful login
+        {                            
+            $_SESSION['loggedIn'] = true; //used to check if logged in - used in other screens
                                                    
-            header('Location: Admin/add_course_admin.php');
+            echo "<script> location.replace('Admin/add_course_admin.php'); </script>";
+                                                   
         }
     }
 }
@@ -60,18 +59,14 @@ function buildPage($att)
           <h3>Admin Login</h3>
           </div>
           <div class='container'>
-          <label for='uname'><b>Username</b></label>
-          <input type='text' placeholder='Enter Username' name='uname' required>
-          <label for='psw'><b>Password</b></label>
-          <input type='password' placeholder='Enter Password' name='psw' required>
+          <label for='username'><b>Username</b></label>
+          <input type='text' placeholder='Enter Username' name='username' pattern='[A-Za-z0-9]{1,32}' required>
+          <label for='password'><b>Password</b></label>
+          <input type='password' placeholder='Enter Password' name='password' pattern='[A-Za-z0-9]{1,32}' required>
           <button type='submit'>Login</button>
-          <label>
-          <input type='checkbox' checked='checked' name='remember'> Remember me
-          </label>
           </div>
           <div class='container' style='background-color:#f1f1f1'>
-          <button type='button' class='cancelbtn'>Help</button>
-          <span class='psw'>Forgot <a href='#'>password?</a></span>
+          <button type='button' class='cancelbtn' style='position: relative; right: 130px'><a href='mailto:help@gmail.com'>Help</a></button>
           </div>
           </form>
           </body>";

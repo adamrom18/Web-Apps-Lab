@@ -1,5 +1,9 @@
+<!--
+Author: Adam Romanowicz
+Description: Initiates Connection with database
+-->
 <?php
-$hostname = "localhost"; //hostname
+$hostname = "db"; //hostname
 $username = "your_username"; //username
 $password = "your_password"; //password
 
@@ -12,3 +16,4 @@ if (!$con) //if cannot connect
         die ("Failed to connect to MySQL: " . mysqli_connect_error()); //prints error
     }
 ?>
+

@@ -1,46 +1,49 @@
+<?php session_start();
+//Author: Adam Romanowicz
+//Description: Add Course Screen
+include 'session_updater_admin.php';
+include 'admin_menu.php';?>
 <!DOCTYPE html>
 <html>
 <head>
-
+<link rel="stylesheet" type="text/css" href="../screens.css" /> <!--links to stylesheet-->
    <title>Riverbridge Univeristy</title>
 </head>
 <body>
+<div class="box">
+   <h1>Add a Course</h1>
 
-<!-- <script src="confirm.js"></script> -->
-
- <!--Bottom Options-->
- <div class="bottom"> <!--Bottom background (input stuff here)-->
+ <div class="inputbox"> 
   <form action="add_course_adminDB.php" method="POST"> <!--Send form input into php using POST method which doesnt save input in url-->
-    <u><h2 style="text-align: center;">Add A Course</h2></u>
-
-    <p><label for="course_code">Course Code</label>
-    <input type="text" name="surname" id="surname" placeholder = "Surname" autofocus pattern="[A-z ]{1-20}" title="Letters and spaces only (Max 20 characters)" required/>
-    </p>
+   <ul>
+    <li><label for="course_code">Course Code</label>
+    <input type="text" name="course_code" id="course_code" pattern="[A-Z]{2}[0-9]{3,4}" autofocus required/>
+    </li>
     
-    <p><label for="course_name">Course Name</label>
-    <input type="text" name="firstname" id="firstname" placeholder = "First Name" pattern="[A-z ]{1-20}" title="Letters and spaces only (Max 20 characters)" required/>
-    </p>
+    <li><label for="course_name">Course Name</label>
+    <input type="text" name="course_name" id="course_name" pattern="[A-Za-z ()]{1,64}" required/>
+    </li>
     
-    <p><label for="description">Description</label>
-    <input type="text" name="address" id="address" placeholder = "e.g The Square, Tullow"  title="Letters, numbers, commas and spaces only (Max 100 characters)" pattern="[A-z0-9 ,]{1-100}"/>
-    </p>
+    <li><label for="description">Description</label>
+    <input type="text" name="description" id="description" pattern="[A-Za-z0-9 .,()]{1,128}"/>
+    </li>
 
-    <p><label for="credits">Credits</label>
-    <input type="text" name="eircode" id="eircode" placeholder="e.g A65F4E2" title="7 characters. Capital letters (excluding 'O') and numbers only. First character must be a capital letter followed by 2 numbers then the remaining 4 characters can either be capital letters or numbers" pattern="[A-NP-Z]{1}[0-9]{2}[A-NP-Z0-9]{4}" required/>
-    </p>
+    <li><label for="credits">Credits</label>
+    <input type="text" name="credits" id="credits" pattern="[0-9]{1,4}" required/>
+    </li>
 
-    <p><label for="lectuer">Lecturer</label>
-    <input type="text" name="number" id="number" placeholder = "e.g 083 4318183" title="Can include digits, (), -, and spaces (Max 16, Min 8)"  pattern="[0-9 -()]{8,16}" required/>
-    </p>
-
+    <li><label for="lecturer">Lecturer</label>
+    <input type="text" name="lecturer" id="lecturer" pattern="[A-Za-z ]{1,32}" required/>
+    </li>
+   </ul>
     <br>
-        
+        <div class="myButton">
         <input type="submit" onclick="confirmCheck()"/>
         <input type="reset" value = "Clear" />
-    
-    <p>
+        </div>
     </form>
  </div>
+</div>
 
 </body>
 

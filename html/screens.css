@@ -1,0 +1,179 @@
+/* Base styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #74b9ff, #a29bfe);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  color: #333;
+}
+
+/* Main white container */
+.box {
+  background-color: #fff;
+  width: 90%;
+  max-width: 850px;
+  margin-top: 50px;
+  padding: 40px 50px;
+  border-radius: 12px;
+  position: relative;
+  top: 30px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.6s ease;
+}
+
+/* Header */
+.box h1 {
+  text-align: center;
+  color: #2d3436;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #6c5ce7;
+  padding-bottom: 10px;
+}
+
+/* Listbox (from listbox.php) */
+select#listbox {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  margin: 10px 0 25px;
+  transition: all 0.3s ease;
+}
+
+select#listbox:focus {
+  border-color: #6c5ce7;
+  box-shadow: 0 0 6px rgba(108, 92, 231, 0.3);
+}
+
+/* Input form styling */
+.inputbox ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.inputbox li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+label {
+  font-weight: 600;
+  color: #2d3436;
+  flex: 0 0 180px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="password"],
+input[type="email"] {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+  border-color: #6c5ce7;
+  box-shadow: 0 0 5px rgba(108, 92, 231, 0.3);
+}
+
+
+/* Disabled input look */
+input:disabled {
+  background-color: #f4f4f4;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Button section */
+.myButton {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.myButton label {
+  margin: 0 20px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+input[type="radio"] {
+  margin-right: 6px;
+  transform: scale(1.2);
+  accent-color: #6c5ce7;
+}
+
+/* Submit button */
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  background-color: #6c5ce7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 25px;
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"] {
+  background-color: #574b90;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive design */
+@media screen and (max-width: 600px) {
+  .box {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .inputbox li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  label {
+    flex: unset;
+    margin-bottom: 6px;
+  }
+
+  input[type="text"],
+  input[type="date"] {
+    width: 100%;
+  }
+
+  .myButton {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  input[type="submit"] {
+    margin: 0;
+  }
+}

@@ -1,4 +1,7 @@
-
+<!--
+Author: Adam Romanowicz
+Description: Creates a record of account details
+-->
 <?php 
 include 'dblink.php'; //Link the php which connects to the database
 
@@ -11,7 +14,7 @@ if (!mysqli_query($con,$sql)) //if query is invalid
 }
 
 mysqli_close($con); //closes database
-
-header( 'Location: login.php ');
 ?>
+<script> location.replace("login.php"); </script> <!--Redirect-->
+
 

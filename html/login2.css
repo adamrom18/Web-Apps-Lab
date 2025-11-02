@@ -1,0 +1,124 @@
+/* General body styling */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #74b9ff, #a29bfe);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+/* Form container */
+form {
+  background-color: #fff;
+  width: 380px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Image container & header */
+.imgcontainer {
+  text-align: center;
+  padding: 30px 0 10px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ddd;
+}
+
+.imgcontainer h3 {
+  margin-top: 10px;
+  color: #333;
+  font-weight: 600;
+}
+
+img.avatar {
+  width: 90px;
+  border-radius: 50%;
+}
+
+/* Input container */
+.container {
+  padding: 16px 24px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+input[type=text],
+input[type=password],
+input[type=email] {
+  width: 100%;
+  padding: 12px;
+  margin: 6px 0 18px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+  border-color: #6c5ce7;
+  box-shadow: 0 0 5px rgba(108, 92, 231, 0.3);
+}
+
+/* Buttons */
+button {
+  background-color: #6c5ce7;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #574b90;
+}
+
+/* Cancel buttons */
+.cancelbtn {
+  background-color: #d63031;
+  width: auto;
+  padding: 10px 18px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.cancelbtn:hover {
+  background-color: #b52b29;
+}
+
+/* Links inside buttons */
+.cancelbtn a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cancelbtn a:hover {
+  text-decoration: underline;
+}
+
+/* Bottom container */
+.container:last-of-type {
+  text-align: center;
+  background-color: #f1f1f1;
+  border-top: 1px solid #ddd;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+  form {
+    width: 90%;
+  }
+}
