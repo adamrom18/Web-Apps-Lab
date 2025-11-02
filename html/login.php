@@ -1,14 +1,47 @@
-<?php session_start(); 
-//Author: Adam Romanowicz
-//Description: Student Login Screen - Three Strikes system
-include 'dblink.php';
-echo '<title>Riverbridge Univeristy</title>
-<link rel="stylesheet" href="login2.css" type="text/css">';
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<form action="/action_page.php" method="post">
+  <button type="button" class="cancelbtn" id="ad"><a href="login_admin.php">Admin</a></button>
+  <div class="imgcontainer">
+    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+    <h3>Student Login</h3>
+  </div>
+
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+        
+    <button type="submit">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn" id="ad"><a href="register.php">Register</a></button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+  </div>
+</form>
+
+</body>
+</html>
+
+<?php include 'db.link.php';
+session_start();
+echo '<link rel="stylesheet" href="login.css" type="text/css">';
 if (ISSET($_POST['username']) && ISSET($_POST['password'])) //stores inputted variables into session
 {
     $attempts = $_SESSION['attempts']; //stores attempts in session
 
-    $sql = "SELECT * FROM Students WHERE username = '{$_POST['username']}' AND password = '{$_POST['password']}'"; //grabs login and password from password table according to input
+    $sql = "SELECT * FROM Students WHERE username = '$_POST[username]' AND password = '$_POST[password]'"; //grabs login and password from password table according to input
 
     if (!$result = mysqli_query($con, $sql)) //sql error
     {
@@ -25,32 +58,22 @@ if (ISSET($_POST['username']) && ISSET($_POST['password'])) //stores inputted va
                 $_SESSION['attempts'] = $attempts;
                 buildPage($attempts);
 
-                echo "<script> alert('No record found with this login name and password combination - Please try again.'); </script>";
+                echo "<div class='errorstyle'>No record found with this login name and password combination - Please try again.</div>";
              }
             else //attempts more than 3
             {
-                echo "<script> alert('Sorry - You have used all 3 attempts'); </script>";    
+                echo "<div class='errorstyle'>Sorry - You have used all 3 attempts<br> 
+                Shutting down ...</div>";   
             }
         }
         else 
         {
             //Successful login
-            $sql = "SELECT * FROM Students WHERE username = '{$_POST['username']}' AND password = '{$_POST['password']}'";
-            $result = mysqli_query($con,$sql);  //creates query
-            if (!mysqli_query($con,$sql)) //if query is invalid
-            {
-                die ("An Error in the SQL Query: " . mysqli_error($con) ); //prints error
-            }
-            $row = mysqli_fetch_array($result); //session variables used to display information about the user in subsequent screens
-            $_SESSION['student_id'] = $row['student_id'];
-            $_SESSION['username'] = $_POST['username']; //Session variable to keep track of the login name
-            $_SESSION['password'] = $_POST['password']; 
-            $_SESSION['full_name'] = $row['full_name'];
-            $_SESSION['email'] = $row['email'];
-            $_SESSION['program'] = $row['program'];                                      
-            $_SESSION['loggedIn'] = true; //used to check if logged in - used in other screens
+            $_SESSION['user'] = $_POST['username']; //Session variable to keep track of the login name
+                                                     // for use with Change Password screen
+            $_SESSION['loggedIn'] = true;
                                                    
-            echo "<script> location.replace('Student/register_course_student.php'); </script>";
+            header('Location: Student/register_course_student.php');
         }
     }
 }
@@ -59,8 +82,8 @@ else
     // building page for initial display
     $attempts = 1; //Screen will be displayed for first attempt
     $_SESSION['attempts'] = $attempts; //set session variable so that the number of attempts can be counted
-    buildPage($attempts);
-}
+    buildPage($attempts); // parameter passed so that a heading can display the number of attempts
+};
 
 function buildPage($att)
 {
@@ -72,18 +95,22 @@ function buildPage($att)
           <h3>Student Login</h3>
           </div>
           <div class='container'>
-          <label for='username'><b>Username</b></label>
-          <input type='text' placeholder='Enter Username' name='username' id='username' pattern='[A-Za-z0-9]{1,32}' required>
-          <label for='password'><b>Password</b></label>
-          <input type='password' placeholder='Enter Password' name='password' id='password' pattern='[A-Za-z0-9]{1-32}' required>
+          <label for='uname'><b>Username</b></label>
+          <input type='text' placeholder='Enter Username' name='uname' required>
+          <label for='psw'><b>Password</b></label>
+          <input type='password' placeholder='Enter Password' name='psw' required>
           <button type='submit'>Login</button>
+          <label>
+          <input type='checkbox' checked='checked' name='remember'> Remember me
+          </label>
           </div>
           <div class='container' style='background-color:#f1f1f1'>
-          <button type='button' class='cancelbtn' style='position: relative; right: 117px' id='ad' ><a href='register.php'>Register</a></button>
+          <button type='button' class='cancelbtn' id='ad'><a href='register.php'>Register</a></button>
+          <span class='psw'>Forgot <a href='#'>password?</a></span>
           </div>
           </form>
           </body>";
 }
 
-mysqli_close($con); //closes database connection
+mysqli_close($con);
 ?>
